@@ -1,18 +1,25 @@
-{% extends 'base.html' %} {%block body%}
+{% extends 'base.html' %} {% block title %}Edit class{% endblock %} {% block body %}
 
-<div align="center">
-  <form action="/edit/{{link}}" method="post">
-    Change class name:
-    <input type="text" id="class_name" name="edited_class" />
-    <input type="submit" value="Change" />
-  </form>
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <p>{{ messages[0] }}</p>
-  {% endif %} {% endwith %}
+<div class="topbar">
+  <a class="brand" href="/admin_home">TimeSync</a>
 </div>
-<script>
-  var classn = document.getElementById("class_name");
-  classn.value = "{{class_name}}";
-</script>
 
-{%endblock%}
+<div class="container">
+  <h1>Edit class</h1>
+
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <p class="flash">{{ messages[0] }}</p>
+  {% endif %} {% endwith %}
+
+  <div class="card">
+    <form class="stacked" action="/edit/{{ link }}" method="post">
+      <div>
+        <label for="class_name">Class name</label>
+        <input type="text" id="class_name" name="edited_class" value="{{ class_name }}" maxlength="59" />
+      </div>
+      <input type="submit" value="Save" />
+    </form>
+  </div>
+</div>
+
+{% endblock %}

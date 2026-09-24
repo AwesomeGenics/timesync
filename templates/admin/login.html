@@ -1,24 +1,30 @@
-{%extends 'base.html'%} {%block title%}Admin Login{%endblock%} {%block body%}
-<div align="center">
-  <h1>Welcome to admin login page</h1>
-  <form action="/login" method="post">
-    Enter Username:
-    <input type="text" placeholder="preet/y cool username" name="username" />
-    <br />
-    <br />
-    Enter Password:
-    <input
-      type="password"
-      name="password"
-      id="pwd"
-      placeholder="Secure ass password"
-    />
-    <br /><br />
-    <input type="submit" value="Login" />
-  </form>
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <p>{{ messages[0] }}</p>
-  {% endif %} {% endwith %}
+{% extends 'base.html' %} {% block title %}Admin login{% endblock %} {% block body %}
+
+<div class="topbar">
+  <a class="brand" href="/">TimeSync</a>
 </div>
 
-{%endblock%}
+<div class="container">
+  <h1>Admin login</h1>
+  <p class="subtitle">Sign in to manage timetables.</p>
+
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <p class="flash">{{ messages[0] }}</p>
+  {% endif %} {% endwith %}
+
+  <div class="card">
+    <form class="stacked" action="/login" method="post">
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" />
+      </div>
+      <div>
+        <label for="pwd">Password</label>
+        <input type="password" id="pwd" name="password" />
+      </div>
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,339 @@
+/* ============================================================
+   TimeSync design system
+   Palette: paper + navy + a single gold accent, restrained.
+   No external fonts/frameworks — system stacks only, kept light
+   for slow connections and low-end phones.
+   ============================================================ */
+
+:root {
+  --paper: #f4f5f2;
+  --surface: #ffffff;
+  --ink: #1c2333;
+  --navy: #1f3a5f;
+  --navy-dim: #3a5075;
+  --gold: #b8892b;
+  --gold-dim: #e8d6ae;
+  --line: #dcdfd8;
+  --muted: #6b7280;
+  --danger: #a23b3b;
+  --danger-dim: #f1dcdc;
+
+  --font-serif: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+
+  --radius: 6px;
+  --gap: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
+}
+
+/* ---------- Topbar ---------- */
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 1.5rem 1.25rem 1rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.topbar .brand {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.topbar a.action {
+  font-size: 0.9rem;
+  color: var(--navy-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1px;
+}
+
+.topbar a.action:hover {
+  border-color: var(--navy-dim);
+}
+
+/* ---------- Headings / copy ---------- */
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--navy);
+  margin: 0.25rem 0 0.25rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* ---------- Flash messages ---------- */
+
+.flash {
+  background: var(--gold-dim);
+  border-left: 3px solid var(--gold);
+  padding: 0.6rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin: 0 0 1.25rem;
+}
+
+/* ---------- Forms ---------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+form.stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+input[type="text"],
+input[type="password"],
+select {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+input:focus,
+select:focus,
+button:focus,
+.day-tabs button:focus {
+  outline: 2px solid var(--navy-dim);
+  outline-offset: 1px;
+}
+
+.field-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.field-row > * {
+  flex: 1;
+}
+
+button,
+input[type="submit"] {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--navy);
+  background: var(--navy);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: var(--navy-dim);
+  border-color: var(--navy-dim);
+}
+
+button.ghost {
+  background: transparent;
+  color: var(--navy);
+}
+
+button.ghost:hover {
+  background: var(--paper);
+}
+
+button.danger {
+  background: transparent;
+  border-color: var(--danger-dim);
+  color: var(--danger);
+}
+
+button.danger:hover {
+  background: var(--danger-dim);
+}
+
+a.link-button {
+  display: inline-block;
+  text-decoration: none;
+  margin-top: 0.5rem;
+}
+
+/* ---------- Day tabs ---------- */
+
+.day-tabs {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding: 0.3rem 0.2rem 1.1rem;
+  margin: 0 -0.2rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.day-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.day-tabs button {
+  flex: 0 0 auto;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 999px;
+}
+
+.day-tabs button[aria-selected="true"] {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.day-tabs button .count {
+  color: inherit;
+  opacity: 0.65;
+  margin-left: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Class list ---------- */
+
+.class-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: fade-in 0.15s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.class-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.class-row:last-child {
+  border-bottom: none;
+}
+
+/* `.class-row { display: flex }` above has the same specificity as the
+   browser's default `[hidden] { display: none }`, and ours loads later,
+   so it was winning and rows never actually hid. Force it explicitly. */
+.class-row[hidden] {
+  display: none;
+}
+
+.class-order {
+  flex: 0 0 auto;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.class-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.class-actions {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.class-actions button,
+.class-actions a {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.empty-state {
+  color: var(--muted);
+  font-style: italic;
+  padding: 1.5rem 0;
+}
+
+/* ---------- Add-class form ---------- */
+
+.add-form {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.add-form .field-row {
+  flex-wrap: wrap;
+}
+
+.add-form .field-row > * {
+  flex: 1 1 140px;
+}

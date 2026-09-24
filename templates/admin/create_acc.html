@@ -1,26 +1,31 @@
-{%extends 'base.html' %} {%block body%}
-<div align="center">
-  <h1>Welcome to Account Creation, {{name}}</h1>
-  <form action="/create_account" method="post">
-    Enter Username:
-    <input
-      type="text"
-      placeholder="preet/y username"
-      name="username"
-    /><br /><br />
-    Enter Password:
-    <input
-      type="password"
-      name="password"
-      id=""
-      placeholder="keep a secure password or..."
-    />
-    <br />
-    <br />
-    <input type="submit" value="Create" />
-  </form>
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <p>{{ messages[0] }}</p>
-  {% endif %} {% endwith %}
+{% extends 'base.html' %} {% block title %}Create account{% endblock %} {% block body %}
+
+<div class="topbar">
+  <a class="brand" href="/admin_home">TimeSync</a>
+  <a class="action" href="/admin_home">Back</a>
 </div>
-{%endblock%}
+
+<div class="container">
+  <h1>New admin account</h1>
+  <p class="subtitle">Signed in as {{ name }}. Usernames and passwords must be under 25 characters.</p>
+
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <p class="flash">{{ messages[0] }}</p>
+  {% endif %} {% endwith %}
+
+  <div class="card">
+    <form class="stacked" action="/create_account" method="post">
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="e.g. priyaverma" maxlength="24" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Keep it secure" maxlength="24" />
+      </div>
+      <input type="submit" value="Create" />
+    </form>
+  </div>
+</div>
+
+{% endblock %}

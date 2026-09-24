@@ -17,4 +17,4 @@ Session(app)
 app.register_blueprint(routes)
 app.register_blueprint(admin)
 
-app.run(debug=True)
+app.run(debug=True, host='0.0.0.0')

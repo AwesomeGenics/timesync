@@ -1,7 +1,36 @@
-{%extends 'base.html'%} {%block title%} Timetable {%endblock%} {%block body%}
-<div align="center"><h1>Timetable Page</h1></div>
-<h2>{{branch}} - Section {{section}}</h2>
+{% extends 'base.html' %} {% block title %}Timetable{% endblock %} {% block body %}
 
-{%for id, day_of_week, class_order, class_name, branch, section in timetable%}
-<p>{{class_name}}</p>
-{%endfor%} {%endblock%}
+<div class="topbar">
+  <a class="brand" href="/">TimeSync</a>
+</div>
+
+<div class="container">
+  {% if branch and section %}
+  <h1>{{ branch }}, Section {{ section }}</h1>
+  <p class="subtitle">Tap a day to see its classes.</p>
+
+  <div class="day-tabs" data-day-tabs>
+    {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] %}
+    <button type="button" data-day="{{ day }}" aria-selected="false">
+      {{ day[:3] }} <span class="count"></span>
+    </button>
+    {% endfor %}
+  </div>
+
+  <ul class="class-list" data-class-list>
+    {% for id, day_of_week, class_order, class_name, cls_branch, cls_section in timetable %}
+    <li class="class-row" data-day="{{ day_of_week }}" hidden>
+      <span class="class-order">{{ class_order }}</span>
+      <span class="class-name">{{ class_name }}</span>
+    </li>
+    {% endfor %}
+    <p class="empty-state" hidden></p>
+  </ul>
+  {% else %}
+  <h1>No timetable selected</h1>
+  <p class="subtitle">Go back to the home page and pick a branch and section first.</p>
+  <a class="link-button" href="/"><button type="button">Back to home</button></a>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,31 +1,79 @@
-{%extends 'base.html'%} {%block title%} Timetable {%endblock%} {%block body%}
+{% extends 'base.html' %} {% block title %}Timetable{% endblock %} {% block body %}
 
-<h2>{{branch}} - Section {{section}}</h2>
+<div class="topbar">
+  <a class="brand" href="/admin_home">TimeSync</a>
+  <a class="action" href="/admin_home">Back</a>
+</div>
 
-{%for id, day_of_week, class_order, class_name, branch, section in timetable%}
-<p>{{class_name}}</p>
-<form>
-  <button formaction="/edit/{{id}}_{{class_name}}">Edit</button>
-  <button formaction="/delete/{{id}}">Delete</button>
-</form>
-{%endfor%}
-<br /><br /><br />
-<form action="{{ url_for('admin.add') }}" method="POST">
-  <input type="hidden" name="branch" value="{{branch}}" />
-  <input type="hidden" name="sec" value="{{section}}" />
-  <input type="text" placeholder="class" name="class" />
-  <select name="day" id="" required>
-    <option value="" selected disabled hidden>Select Day</option>
-    <option value="Monday">Monday</option>
-    <option value="Tuesday">Tuesday</option>
-    <option value="Wednesday">Wednesday</option>
-    <option value="Thursday">Thursday</option>
-    <option value="Friday">Friday</option>
-    <option value="Saturday">Saturday</option>
-  </select>
-  <input type="text" placeholder="order" name="order" />
-  <input type="submit" value="Add" />
-</form>
-{% with messages = get_flashed_messages() %} {% if messages %}
-<p>{{ messages[0] }}</p>
-{% endif %} {% endwith %} {%endblock%}
+<div class="container">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <p class="flash">{{ messages[0] }}</p>
+  {% endif %} {% endwith %}
+
+  {% if branch and section %}
+  <h1>{{ branch }}, Section {{ section }}</h1>
+  <p class="subtitle">Tap a day to edit its classes.</p>
+
+  <div class="day-tabs" data-day-tabs>
+    {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] %}
+    <button type="button" data-day="{{ day }}" aria-selected="false">
+      {{ day[:3] }} <span class="count"></span>
+    </button>
+    {% endfor %}
+  </div>
+
+  <ul class="class-list" data-class-list>
+    {% for id, day_of_week, class_order, class_name, cls_branch, cls_section in timetable %}
+    <li class="class-row" data-day="{{ day_of_week }}" hidden>
+      <span class="class-order">{{ class_order }}</span>
+      <span class="class-name">{{ class_name }}</span>
+      <form class="class-actions">
+        <button type="submit" class="ghost" formaction="/edit/{{ id }}_{{ class_name }}">Edit</button>
+        <button type="submit" class="danger" formaction="/delete/{{ id }}">Delete</button>
+      </form>
+    </li>
+    {% endfor %}
+    <p class="empty-state" hidden></p>
+  </ul>
+
+  <div class="add-form">
+    <h2 style="font-family: var(--font-serif); font-weight: 400; font-size: 1.2rem; color: var(--navy); margin: 0 0 0.9rem;">
+      Add a class
+    </h2>
+    <form class="stacked" action="{{ url_for('admin.add') }}" method="POST">
+      <input type="hidden" name="branch" value="{{ branch }}" />
+      <input type="hidden" name="sec" value="{{ section }}" />
+      <div class="field-row">
+        <div>
+          <label for="class">Class name</label>
+          <input type="text" id="class" placeholder="e.g. Data Structures" name="class" />
+        </div>
+        <div>
+          <label for="day">Day</label>
+          <select name="day" id="day" required>
+            <option value="" selected disabled hidden>Select day</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </select>
+        </div>
+        <div>
+          <label for="order">Period</label>
+          <input type="text" id="order" placeholder="e.g. 1" name="order" />
+        </div>
+      </div>
+      <input type="submit" value="Add class" />
+    </form>
+  </div>
+
+  {% else %}
+  <h1>No timetable selected</h1>
+  <p class="subtitle">Go back and pick a branch and section first.</p>
+  <a class="link-button" href="/admin_home"><button type="button">Back to admin home</button></a>
+  {% endif %}
+</div>
+
+{% endblock %}
