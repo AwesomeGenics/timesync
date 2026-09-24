@@ -1,0 +1,7 @@
+{%extends 'base.html'%} {%block title%} Timetable {%endblock%} {%block body%}
+<div align="center"><h1>Timetable Page</h1></div>
+<h2>{{branch}} - Section {{section}}</h2>
+
+{%for id, day_of_week, class_order, class_name, branch, section in timetable%}
+<p>{{class_name}}</p>
+{%endfor%} {%endblock%}

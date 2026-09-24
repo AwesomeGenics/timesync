@@ -1,0 +1,24 @@
+{%extends 'base.html'%} {%block title%}Admin Login{%endblock%} {%block body%}
+<div align="center">
+  <h1>Welcome to admin login page</h1>
+  <form action="/login" method="post">
+    Enter Username:
+    <input type="text" placeholder="preet/y cool username" name="username" />
+    <br />
+    <br />
+    Enter Password:
+    <input
+      type="password"
+      name="password"
+      id="pwd"
+      placeholder="Secure ass password"
+    />
+    <br /><br />
+    <input type="submit" value="Login" />
+  </form>
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <p>{{ messages[0] }}</p>
+  {% endif %} {% endwith %}
+</div>
+
+{%endblock%}

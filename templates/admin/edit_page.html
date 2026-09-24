@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {%block body%}
+
+<div align="center">
+  <form action="/edit/{{link}}" method="post">
+    Change class name:
+    <input type="text" id="class_name" name="edited_class" />
+    <input type="submit" value="Change" />
+  </form>
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <p>{{ messages[0] }}</p>
+  {% endif %} {% endwith %}
+</div>
+<script>
+  var classn = document.getElementById("class_name");
+  classn.value = "{{class_name}}";
+</script>
+
+{%endblock%}

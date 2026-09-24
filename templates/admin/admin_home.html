@@ -1,0 +1,33 @@
+{%extends 'base.html'%} {%block title%} Home Page {%endblock%} {%block body%}
+<div align="right"><a href="/logout" id="admin">Logout</a></div>
+<div align="center">
+  <h1>Hello {{name}}, Welcome to TimeSync</h1>
+  <form action="/timetable_modify" method="post" id="table_selection">
+    <select name="branch" id="" required>
+      <option value="AIML">AIML</option>
+      <option value="CSBS">CSBS</option>
+      <option value="CSDS">CSDS</option>
+      <option value="CSCS">CSCS</option>
+      <option value="IT">IT</option>
+      <option value="IOT">IOT</option>
+      <option value="CE&ME">CE&ME</option>
+      <option value="ECE">ECE</option>
+      <option value="ECS">ECS</option>
+      <option value="EE">EE</option>
+    </select>
+    <select name="semester" id="">
+      <option value="1">Semester 1</option>
+    </select>
+    <input type="text" placeholder="Enter Section" name="section" />
+    <br /><br />
+    <input type="submit" value="Modify Timetable" id="submit" />
+  </form>
+  <br />
+  <a href="/create_account"> <button>Create an Account</button></a>
+</div>
+<script>
+  var admin = document.getElementById("admin");
+  admin.setAttribute(href, "/logout");
+  admin.innerText = "Logout";
+</script>
+{%block home_admin%}{%endblock%} {%endblock%}

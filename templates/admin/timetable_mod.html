@@ -1,0 +1,31 @@
+{%extends 'base.html'%} {%block title%} Timetable {%endblock%} {%block body%}
+
+<h2>{{branch}} - Section {{section}}</h2>
+
+{%for id, day_of_week, class_order, class_name, branch, section in timetable%}
+<p>{{class_name}}</p>
+<form>
+  <button formaction="/edit/{{id}}_{{class_name}}">Edit</button>
+  <button formaction="/delete/{{id}}">Delete</button>
+</form>
+{%endfor%}
+<br /><br /><br />
+<form action="{{ url_for('admin.add') }}" method="POST">
+  <input type="hidden" name="branch" value="{{branch}}" />
+  <input type="hidden" name="sec" value="{{section}}" />
+  <input type="text" placeholder="class" name="class" />
+  <select name="day" id="" required>
+    <option value="" selected disabled hidden>Select Day</option>
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+  </select>
+  <input type="text" placeholder="order" name="order" />
+  <input type="submit" value="Add" />
+</form>
+{% with messages = get_flashed_messages() %} {% if messages %}
+<p>{{ messages[0] }}</p>
+{% endif %} {% endwith %} {%endblock%}
