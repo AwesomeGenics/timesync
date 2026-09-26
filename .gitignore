@@ -1,2 +1,5 @@
-timetables.db
+.env
 flask_session/
+__pycache__/
+timetables.db
+app/__pycache/

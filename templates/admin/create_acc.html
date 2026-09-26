@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block title %}Create account{% endblock %} {% block body %}
+{% extends 'base.html' %} {% block title %}Create account{% endblock %} {% block
+body %}
 
 <div class="topbar">
   <a class="brand" href="/admin_home">TimeSync</a>
@@ -7,7 +8,10 @@
 
 <div class="container">
   <h1>New admin account</h1>
-  <p class="subtitle">Signed in as {{ name }}. Usernames and passwords must be under 25 characters.</p>
+  <p class="subtitle">
+    Signed in as {{ name }}. Usernames and passwords must be under 25
+    characters.
+  </p>
 
   {% with messages = get_flashed_messages() %} {% if messages %}
   <p class="flash">{{ messages[0] }}</p>
@@ -17,11 +21,23 @@
     <form class="stacked" action="/create_account" method="post">
       <div>
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="e.g. priyaverma" maxlength="24" />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="e.g. preet"
+          maxlength="24"
+        />
       </div>
       <div>
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Keep it secure" maxlength="24" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Keep it close to heart"
+          maxlength="24"
+        />
       </div>
       <input type="submit" value="Create" />
     </form>

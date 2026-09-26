@@ -12,16 +12,21 @@ def login():
         creds = admin_db.fetch_for_check(uname)
         try:
             if uname and pwd and check_password_hash(creds['password'], pwd):
-                session['uname'] = uname
+                if uname == 'anshu':
+                    uname = 'Preet'
+                    session['uname'] = uname
+                else:
+                    session['uname'] = uname
                 return redirect('/admin_home')
             elif uname and pwd and not check_password_hash(creds['password'],pwd):
-                flash('Wrong password entered.')
+                flash('Andhe galat password daala hai!')
                 return redirect('/login')
             else:
                 flash('No field can be left empty!')
                 return redirect('/login')
         except Exception as e:
-            return f'''Error Occurred: {e}, this error means account probably does not exist.'''
+            flash(f'Bakchodi mat kar laude!')
+            return redirect('/login')
 
     return render_template('/admin/login.html')
 

@@ -1,13 +1,16 @@
-{% extends 'base.html' %} {% block title %}TimeSync{% endblock %} {% block body %}
+{% extends 'base.html' %} {% block title %}TimeSync{% endblock %} {% block body
+%}
 
 <div class="topbar">
-  <span class="brand">TimeSync</span>
+  <span class="brand"><b>TimeSync</b></span>
   <a class="action" href="/login">Admin login</a>
 </div>
 
 <div class="container">
   <h1>Find your timetable</h1>
-  <p class="subtitle">Pick your branch and section to see the weekly schedule.</p>
+  <p class="subtitle">
+    Pick your branch and section to see the weekly schedule.
+  </p>
 
   <div class="card">
     <form class="stacked" action="/timetable" method="post">
@@ -36,7 +39,13 @@
         </div>
         <div>
           <label for="section">Section</label>
-          <input type="text" id="section" name="section" placeholder="e.g. A" required />
+          <input
+            type="text"
+            id="section"
+            name="section"
+            placeholder="e.g. A"
+            required
+          />
         </div>
       </div>
 
