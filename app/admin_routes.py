@@ -12,14 +12,10 @@ def login():
         creds = admin_db.fetch_for_check(uname)
         try:
             if uname and pwd and check_password_hash(creds['password'], pwd):
-                if uname == 'anshu':
-                    uname = 'Preet'
-                    session['uname'] = uname
-                else:
-                    session['uname'] = uname
+                session['uname'] = uname
                 return redirect('/admin_home')
             elif uname and pwd and not check_password_hash(creds['password'],pwd):
-                flash('Andhe galat password daala hai!')
+                flash('Wrong password entered!')
                 return redirect('/login')
             else:
                 flash('No field can be left empty!')
