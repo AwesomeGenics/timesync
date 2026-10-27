@@ -1,15 +1,39 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <form action="/xyz" method="post">
-      <input type="text" name="username" />
-      <input type="password" name="password" id="" />
-      <input type="submit" value="Create" />
+{% extends 'base.html' %}
+{% block title %}Create Account — TimeSync{% endblock %}
+{% block body %}
+
+<header class="topbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">
+      <span class="material-symbols-outlined">schedule</span>
+    </span>
+    <span>TimeSync</span>
+  </a>
+</header>
+
+<main class="container">
+  <div class="card">
+    <form class="stacked" action="/xyz" method="post">
+      <div class="input-group">
+        <label for="username">
+          <span class="material-symbols-outlined">person</span>
+          Username
+        </label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="input-group">
+        <label for="password">
+          <span class="material-symbols-outlined">key</span>
+          Password
+        </label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <button type="submit">
+        <span class="material-symbols-outlined">add</span>
+        Create
+      </button>
     </form>
-  </body>
-</html>
+  </div>
+</main>
+
+{% endblock %}

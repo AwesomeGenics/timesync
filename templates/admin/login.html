@@ -1,31 +1,70 @@
-{% extends 'base.html' %} {% block title %}Admin login{% endblock %} {% block
-body %}
+{% extends 'base.html' %}
+{% block title %}Admin Sign In — TimeSync{% endblock %}
+{% block body %}
 
-<div class="topbar">
-  <a class="brand" href="/">TimeSync</a>
-</div>
+<header class="topbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">
+      <span class="material-symbols-outlined">schedule</span>
+    </span>
+    <span>TimeSync</span>
+  </a>
+  <a class="action" href="/">
+    <span class="material-symbols-outlined">arrow_back</span>
+    <span>Back</span>
+  </a>
+</header>
 
-<div class="container">
-  <h1>Admin login</h1>
-  <p class="subtitle">Sign in to manage timetables.</p>
+<main class="container">
+  <div class="page-header">
+    <h1>Admin Sign In</h1>
+  </div>
 
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <p class="flash">{{ messages[0] }}</p>
-  {% endif %} {% endwith %}
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="flash">
+    <span class="material-symbols-outlined">info</span>
+    <span>{{ messages[0] }}</span>
+  </div>
+  {% endif %}
+  {% endwith %}
 
   <div class="card">
     <form class="stacked" action="/login" method="post">
-      <div>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" />
+      <div class="input-group">
+        <label for="username">
+          <span class="material-symbols-outlined">person</span>
+          Username
+        </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          required
+          autocomplete="username"
+        />
       </div>
-      <div>
-        <label for="pwd">Password</label>
-        <input type="password" id="pwd" name="password" />
+
+      <div class="input-group">
+        <label for="pwd">
+          <span class="material-symbols-outlined">key</span>
+          Password
+        </label>
+        <input
+          type="password"
+          id="pwd"
+          name="password"
+          required
+          autocomplete="current-password"
+        />
       </div>
-      <input type="submit" value="Login" />
+
+      <button type="submit">
+        <span class="material-symbols-outlined">login</span>
+        Sign In
+      </button>
     </form>
   </div>
-</div>
+</main>
 
 {% endblock %}

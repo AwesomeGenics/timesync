@@ -1,25 +1,58 @@
-{% extends 'base.html' %} {% block title %}Edit class{% endblock %} {% block body %}
+{% extends 'base.html' %}
+{% block title %}Edit Class — TimeSync{% endblock %}
+{% block body %}
 
-<div class="topbar">
-  <a class="brand" href="/admin_home">TimeSync</a>
-</div>
+<header class="topbar">
+  <a class="brand" href="/admin_home">
+    <span class="brand-icon">
+      <span class="material-symbols-outlined">schedule</span>
+    </span>
+    <span>TimeSync</span>
+  </a>
+  <a class="action" href="/admin_home">
+    <span class="material-symbols-outlined">arrow_back</span>
+    <span>Cancel</span>
+  </a>
+</header>
 
-<div class="container">
-  <h1>Edit class</h1>
+<main class="container">
+  <div class="page-header">
+    <h1>Edit Class</h1>
+  </div>
 
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <p class="flash">{{ messages[0] }}</p>
-  {% endif %} {% endwith %}
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="flash">
+    <span class="material-symbols-outlined">info</span>
+    <span>{{ messages[0] }}</span>
+  </div>
+  {% endif %}
+  {% endwith %}
 
   <div class="card">
     <form class="stacked" action="/edit/{{ link }}" method="post">
-      <div>
-        <label for="class_name">Class name</label>
-        <input type="text" id="class_name" name="edited_class" value="{{ class_name }}" maxlength="59" />
+      <div class="input-group">
+        <label for="class_name">
+          <span class="material-symbols-outlined">edit_note</span>
+          Class Name
+        </label>
+        <input
+          type="text"
+          id="class_name"
+          name="edited_class"
+          value="{{ class_name }}"
+          maxlength="59"
+          required
+          autocomplete="off"
+        />
       </div>
-      <input type="submit" value="Save" />
+
+      <button type="submit">
+        <span class="material-symbols-outlined">save</span>
+        Save Changes
+      </button>
     </form>
   </div>
-</div>
+</main>
 
 {% endblock %}

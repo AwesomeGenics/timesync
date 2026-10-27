@@ -1,13 +1,28 @@
-{% extends 'base.html' %} {% block title %}Timetable{% endblock %} {% block body %}
+{% extends 'base.html' %}
+{% block title %}{{ branch }} Sec {{ section }} — TimeSync{% endblock %}
+{% block body %}
 
-<div class="topbar">
-  <a class="brand" href="/">TimeSync</a>
-</div>
+<header class="topbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">
+      <span class="material-symbols-outlined">schedule</span>
+    </span>
+    <span>TimeSync</span>
+  </a>
+  <a class="action" href="/">
+    <span class="material-symbols-outlined">arrow_back</span>
+    <span>Change</span>
+  </a>
+</header>
 
-<div class="container">
+<main class="container">
   {% if branch and section %}
-  <h1>{{ branch }}, Section {{ section }}</h1>
-  <p class="subtitle">Tap a day to see its classes.</p>
+  <div class="page-header">
+    <h1>
+      <span>{{ branch }}</span>
+      <span class="badge-pill">Section {{ section }}</span>
+    </h1>
+  </div>
 
   <div class="day-tabs" data-day-tabs>
     {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] %}
@@ -24,13 +39,26 @@
       <span class="class-name">{{ class_name }}</span>
     </li>
     {% endfor %}
-    <p class="empty-state" hidden></p>
+    <div class="empty-state" hidden>
+      <span class="material-symbols-outlined">event_busy</span>
+      <span>No classes scheduled</span>
+    </div>
   </ul>
+
   {% else %}
-  <h1>No timetable selected</h1>
-  <p class="subtitle">Go back to the home page and pick a branch and section first.</p>
-  <a class="link-button" href="/"><button type="button">Back to home</button></a>
+  <div class="card" style="text-align: center; padding: 2.5rem 1.5rem;">
+    <div style="margin-bottom: 1rem;">
+      <span class="material-symbols-outlined" style="font-size: 40px; color: var(--md-sys-color-primary);">calendar_month</span>
+    </div>
+    <h1 style="justify-content: center; font-size: 1.35rem; margin-bottom: 0.5rem;">No Timetable Selected</h1>
+    <a class="link-button" href="/">
+      <button type="button">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Select Section
+      </button>
+    </a>
+  </div>
   {% endif %}
-</div>
+</main>
 
 {% endblock %}

@@ -36,7 +36,7 @@
 
     if (emptyState) {
       emptyState.hidden = visible !== 0;
-      emptyState.textContent = `No classes scheduled for ${day}.`;
+      emptyState.innerHTML = `<span class="material-symbols-outlined">event_busy</span><span>No classes scheduled for ${day}</span>`;
     }
 
     if (persist) {

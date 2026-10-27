@@ -1,21 +1,32 @@
-{% extends 'base.html' %} {% block title %}TimeSync{% endblock %} {% block body
-%}
+{% extends 'base.html' %}
+{% block title %}TimeSync — Timetable{% endblock %}
+{% block body %}
 
-<div class="topbar">
-  <span class="brand"><b>TimeSync</b></span>
-  <a class="action" href="/login">Admin login</a>
-</div>
+<header class="topbar">
+  <a class="brand" href="/">
+    <span class="brand-icon">
+      <span class="material-symbols-outlined">schedule</span>
+    </span>
+    <span>TimeSync</span>
+  </a>
+  <a class="action" href="/login">
+    <span class="material-symbols-outlined">lock</span>
+    <span>Admin</span>
+  </a>
+</header>
 
-<div class="container">
-  <h1>Find your timetable</h1>
-  <p class="subtitle">
-    Pick your branch and section to see the weekly schedule.
-  </p>
+<main class="container">
+  <div class="page-header">
+    <h1>Find Timetable</h1>
+  </div>
 
   <div class="card">
-    <form class="stacked" action="/timetable" method="post">
-      <div>
-        <label for="branch">Branch</label>
+    <form class="stacked" action="/timetable" method="post" id="table_selection">
+      <div class="input-group">
+        <label for="branch">
+          <span class="material-symbols-outlined">school</span>
+          Branch
+        </label>
         <select name="branch" id="branch" required>
           <option value="AIML">AIML</option>
           <option value="CSBS">CSBS</option>
@@ -31,27 +42,37 @@
       </div>
 
       <div class="field-row">
-        <div>
-          <label for="semester">Semester</label>
+        <div class="input-group">
+          <label for="semester">
+            <span class="material-symbols-outlined">auto_stories</span>
+            Semester
+          </label>
           <select name="semester" id="semester">
             <option value="1">Semester 1</option>
           </select>
         </div>
-        <div>
-          <label for="section">Section</label>
+        <div class="input-group">
+          <label for="section">
+            <span class="material-symbols-outlined">badge</span>
+            Section
+          </label>
           <input
             type="text"
             id="section"
             name="section"
             placeholder="e.g. A"
             required
+            autocomplete="off"
           />
         </div>
       </div>
 
-      <input type="submit" value="Get timetable" />
+      <button type="submit">
+        <span class="material-symbols-outlined">search</span>
+        View Timetable
+      </button>
     </form>
   </div>
-</div>
+</main>
 
 {% endblock %}
